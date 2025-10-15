@@ -1,4 +1,5 @@
 /* Page Layout */
+/* Page Layout */
 .page {
     animation: fadeIn 0.3s ease;
 }
@@ -14,6 +15,35 @@
     font-size: 0.95em;
     margin-bottom: 30px;
 }
+
+/* AI Assistant Page Special Styling */
+.assistant-page-wrapper {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 30px;
+    border-radius: 20px;
+    margin: -30px;
+    min-height: calc(100vh - 60px);
+}
+
+.assistant-page-wrapper .page-title,
+.assistant-page-wrapper .page-subtitle {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.assistant-page-wrapper .page-title {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.assistant-page-wrapper .page-subtitle {
+    text-align: center;
+    font-size: 1.1em;
+    opacity: 0.95;
+    margin-bottom: 30px;
+}
+
 
 /* Card Styles */
 .card {

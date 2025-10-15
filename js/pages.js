@@ -34,7 +34,7 @@ const Pages = {
     // AI ASSISTANT PAGE
     'ai-assistant'() {
         return window.AssistantPage
-            ? window.AssistantPage.render()
+            ? `<div class="page assistant-page-wrapper">${window.AssistantPage.render()}</div>`
             : '<div class="page"><div class="card">Assistant module failed to load.</div></div>';
     },
 
