@@ -8,15 +8,25 @@ const Navigation = {
     },
     
     attachEventListeners() {
-        const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(item => {
-            item.addEventListener('click', (e) => {
-                const page = item.getAttribute('data-page');
-                this.navigateTo(page);
-            });
+    const navItems = document.querySelectorAll('.nav-item');
+
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+        const page = item.getAttribute('data-page');
+
+        this.navigateTo(page);
+
+        // ✅ Initialize tabs once the new HTML is in the DOM
+        setTimeout(() => {
+            if (page === 'ai-assistant' && window.DFYAssistantTabs) {
+            // Pass a root scope if you have one (optional)
+            const root = document.getElementById('page-container') || document.querySelector('.page');
+            window.DFYAssistantTabs.init(root);
+            }
+        }, 0);
         });
+    });
     },
-    
     navigateTo(page) {
         // Update active state
         document.querySelectorAll('.nav-item').forEach(item => {

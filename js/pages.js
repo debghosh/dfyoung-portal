@@ -33,39 +33,9 @@ const Pages = {
 
     // AI ASSISTANT PAGE
     'ai-assistant'() {
-        return `
-            <div class="page">
-                <h1 class="page-title">🤖 AI Assistant</h1>
-                <p class="page-subtitle">Conversational AI for intelligent shipping management</p>
-
-                <div class="card">
-                    <h3 style="margin-bottom: 15px;">Chat with AI Agent</h3>
-                    <div class="chat-container">
-                        <div class="message user">
-                            <strong>You:</strong>
-                            <p>I need to ship 500 lbs of electronics from LA to NY. Can you give me a quote?</p>
-                        </div>
-                        <div class="message ai">
-                            <strong>AI Agent:</strong>
-                            <p>I've analyzed your request and found 3 optimized options. Based on your 5-day window, ground shipping via southern corridor (avoiding Chicago snow) will save $340 vs air freight.
-
-Recommended: Ground Freight - $680, arrives in 4 days, 15% discount applied ✓</p>
-                        </div>
-                    </div>
-                    <p class="ai-note">✨ AI automatically detected weather risks, applied volume discounts, and optimized routing</p>
-                </div>
-
-                <div class="card">
-                    <h3 style="margin-bottom: 15px;">Quick Actions</h3>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button class="btn btn-primary">Get Quote</button>
-                        <button class="btn btn-secondary">Track Shipment</button>
-                        <button class="btn btn-secondary">Book Shipment</button>
-                        <button class="btn btn-secondary">View Recommendations</button>
-                    </div>
-                </div>
-            </div>
-        `;
+        return window.AssistantPage
+            ? window.AssistantPage.render()
+            : '<div class="page"><div class="card">Assistant module failed to load.</div></div>';
     },
 
     // ANALYTICS PAGE

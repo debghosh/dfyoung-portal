@@ -1,0 +1,38 @@
+/* AI Assistant Tabs v2 - styles existing .workflow-tabs/.tab */
+.workflow-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 12px 0 16px;
+  list-style: none;
+  padding: 0;
+}
+.workflow-tabs .tab {
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 2px solid #e2e8f0;
+  background: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.15s ease;
+  display: inline-block;
+}
+.workflow-tabs .tab:hover { border-color: #667eea; transform: translateY(-1px); }
+.workflow-tabs .tab.active {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 6px 14px rgba(102, 126, 234, 0.25);
+}
+
+/* Hide non-active panels */
+.workflow-content { display: none; }
+.workflow-content.active { display: block; }
+
+/* Utility for fallback-built tabs */
+.ai-tabs { display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 16px; }
+.ai-tab { cursor:pointer; padding:8px 12px; border-radius:10px; border:2px solid #e2e8f0; background:#fff; font-weight:600; }
+.ai-tab:hover { border-color:#667eea; transform: translateY(-1px); }
+.ai-tab.active { color:#fff; border-color:transparent; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); box-shadow:0 6px 14px rgba(102,126,234,0.25); }
+.ai-workflow.hidden { display:none !important; }
