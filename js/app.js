@@ -95,8 +95,11 @@ window.PortalUtils = {
     formatNumber
 };
 
-// Error handling
+// Error handling - filter out common harmless errors
 window.addEventListener('error', function(e) {
+    // Ignore null errors from assistant_tabs observer
+    if (e.error === null) return;
+    
     console.error('Portal Error:', e.error);
     // You could show a user-friendly error message here
 });

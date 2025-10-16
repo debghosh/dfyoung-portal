@@ -1,11 +1,15 @@
-/*! DFY Assistant Tabs v5
+/*! DFY Assistant Tabs v6
  * - Waits for SPA content using MutationObserver (no race conditions)
  * - Wires existing .workflow-tabs/.tab and .workflow-content
  * - Falls back to index mapping and explicit style.display toggling
  * - Safe to include once; auto-inits whenever AI Assistant content appears
+ * - Reduced console logging
  */
 (function () {
-  const STATE = { initializedFor: new WeakSet() };
+  const STATE = { 
+    initializedFor: new WeakSet(),
+    hasLogged: false // Track if we've already logged the waiting message
+  };
 
   function $(sel, root = document) { return root.querySelector(sel); }
   function $all(sel, root = document) { return Array.from(root.querySelectorAll(sel)); }
@@ -84,7 +88,8 @@
     });
 
     STATE.initializedFor.add(scope);
-    console.log('[DFY Tabs v5] Initialized in scope:', scope);
+    console.log('[DFY Tabs v6] Initialized in scope:', scope);
+    STATE.hasLogged = false; // Reset logging flag when we successfully initialize
     return true;
   }
 
@@ -96,8 +101,9 @@
         if (wireScope(root)) any = true;
       }
     }
-    if (!any) {
-      console.log('[DFY Tabs v5] Waiting for AI Assistant content...');
+    if (!any && !STATE.hasLogged) {
+      console.log('[DFY Tabs v6] Waiting for AI Assistant content...');
+      STATE.hasLogged = true; // Only log once
     }
     return any;
   }
@@ -112,6 +118,7 @@
     },
     forceInit() {
       STATE.initializedFor = new WeakSet(); // reset and re-try
+      STATE.hasLogged = false;
       return tryInitAll();
     }
   };

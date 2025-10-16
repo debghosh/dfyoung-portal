@@ -1,100 +1,354 @@
-// Analytics Page JavaScript
+// Analytics Page Module
 (function() {
-    window.AnalyticsPage = {
-        init() {
-            this.attachEventListeners();
-        },
+    function analyticsMarkup() {
+        return `
+            <div class="page analytics-page">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">📊 Analytics Dashboard</h1>
+                        <p class="page-subtitle">AI-powered insights for your logistics operations</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary">📅 Last 30 Days</button>
+                        <button class="btn btn-primary">📥 Export Report</button>
+                    </div>
+                </div>
 
-        attachEventListeners() {
-            // Filter button handlers
-            const filterButtons = document.querySelectorAll('.analytics-page .filter-btn');
-            filterButtons.forEach(btn => {
+                <div class="kpi-grid">
+                    ${createKPICard('Total Spend', '$847K', '-12.4%', true)}
+                    ${createKPICard('Active Shipments', '1,247', '+8.1%', true)}
+                    ${createKPICard('On-Time Delivery', '94.7%', '+3.2%', true)}
+                    ${createKPICard('Carbon Footprint', '342t', '-18.3%', true)}
+                </div>
+
+                <div class="recommendations-section">
+                    <div class="section-header">
+                        <div class="section-title">AI-Powered Recommendations</div>
+                        <div class="ai-badge">🤖 AI Generated</div>
+                    </div>
+
+                    <div class="recommendation-card">
+                        <div class="rec-header">
+                            <div class="rec-title">💡 Consolidate East Coast Shipments</div>
+                            <div class="rec-impact high">High Impact</div>
+                        </div>
+                        <div class="rec-description">
+                            You're shipping to the East Coast 47 times per month with an average of 2-5 day flexibility. By consolidating shipments to New York, Boston, and Philadelphia into weekly batches, you can significantly reduce costs and carbon emissions.
+                        </div>
+                        <div class="rec-metrics">
+                            <div class="rec-metric">
+                                <div class="rec-metric-label">Annual Savings</div>
+                                <div class="rec-metric-value">$124,800</div>
+                            </div>
+                            <div class="rec-metric">
+                                <div class="rec-metric-label">Carbon Reduction</div>
+                                <div class="rec-metric-value">34%</div>
+                            </div>
+                            <div class="rec-metric">
+                                <div class="rec-metric-label">Implementation</div>
+                                <div class="rec-metric-value">2 weeks</div>
+                            </div>
+                        </div>
+                        <div class="rec-actions">
+                            <button class="btn btn-primary">Implement Now</button>
+                            <button class="btn btn-secondary">View Details</button>
+                            <button class="btn btn-secondary">Dismiss</button>
+                        </div>
+                    </div>
+
+                    <div class="recommendation-card">
+                        <div class="rec-header">
+                            <div class="rec-title">🚢 Shift Air to Ocean+Rail</div>
+                            <div class="rec-impact medium">Medium Impact</div>
+                        </div>
+                        <div class="rec-description">
+                            30% of your international shipments use air freight with 10+ day flexibility. Switching to ocean+rail multi-modal transport would meet delivery windows while dramatically reducing costs and emissions.
+                        </div>
+                        <div class="rec-metrics">
+                            <div class="rec-metric">
+                                <div class="rec-metric-label">Annual Savings</div>
+                                <div class="rec-metric-value">$287,400</div>
+                            </div>
+                            <div class="rec-metric">
+                                <div class="rec-metric-label">Carbon Reduction</div>
+                                <div class="rec-metric-value">68%</div>
+                            </div>
+                            <div class="rec-metric">
+                                <div class="rec-metric-label">Affected Shipments</div>
+                                <div class="rec-metric-value">142/year</div>
+                            </div>
+                        </div>
+                        <div class="rec-actions">
+                            <button class="btn btn-primary">Implement Now</button>
+                            <button class="btn btn-secondary">View Details</button>
+                            <button class="btn btn-secondary">Dismiss</button>
+                        </div>
+                    </div>
+
+                    <div class="recommendation-card">
+                        <div class="rec-header">
+                            <div class="rec-title">🏢 Relocate Dallas Warehouse</div>
+                            <div class="rec-impact high">High Impact</div>
+                        </div>
+                        <div class="rec-description">
+                            Analysis of your shipping patterns shows 73% of Dallas warehouse shipments go to the Southeast. Relocating to Atlanta would reduce average transit distance by 340 miles and improve delivery times by 1.2 days.
+                        </div>
+                        <div class="rec-metrics">
+                            <div class="rec-metric">
+                                <div class="rec-metric-label">Annual Savings</div>
+                                <div class="rec-metric-value">$340,000</div>
+                            </div>
+                            <div class="rec-metric">
+                                <div class="rec-metric-label">Faster Delivery</div>
+                                <div class="rec-metric-value">1.2 days</div>
+                            </div>
+                            <div class="rec-metric">
+                                <div class="rec-metric-label">ROI Timeline</div>
+                                <div class="rec-metric-value">18 months</div>
+                            </div>
+                        </div>
+                        <div class="rec-actions">
+                            <button class="btn btn-primary">Run Scenario</button>
+                            <button class="btn btn-secondary">View Analysis</button>
+                            <button class="btn btn-secondary">Dismiss</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div class="chart-title">Shipping Spend by Month</div>
+                            <div class="chart-filter">
+                                <button class="filter-btn active">6M</button>
+                                <button class="filter-btn">1Y</button>
+                                <button class="filter-btn">All</button>
+                            </div>
+                        </div>
+                        <div class="chart-placeholder">
+                            <div class="bar-chart">
+                                <div class="bar" style="height: 65%;">
+                                    <div class="bar-value">$920K</div>
+                                    <div class="bar-label">Jun</div>
+                                </div>
+                                <div class="bar" style="height: 72%;">
+                                    <div class="bar-value">$1.02M</div>
+                                    <div class="bar-label">Jul</div>
+                                </div>
+                                <div class="bar" style="height: 58%;">
+                                    <div class="bar-value">$820K</div>
+                                    <div class="bar-label">Aug</div>
+                                </div>
+                                <div class="bar" style="height: 80%;">
+                                    <div class="bar-value">$1.13M</div>
+                                    <div class="bar-label">Sep</div>
+                                </div>
+                                <div class="bar" style="height: 68%;">
+                                    <div class="bar-value">$960K</div>
+                                    <div class="bar-label">Oct</div>
+                                </div>
+                                <div class="bar" style="height: 60%;">
+                                    <div class="bar-value">$847K</div>
+                                    <div class="bar-label">Nov</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="insight-card">
+                            <h3>💡 AI Insight</h3>
+                            <p>November spend decreased 12% due to successful consolidation strategy implemented in October. Projected December spend: $890K with continued optimization.</p>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div class="chart-title">Spend by Mode</div>
+                        </div>
+                        <div class="chart-placeholder" style="height: 250px;">
+                            <svg width="200" height="200" viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="80" fill="none" stroke="#667eea" stroke-width="40" stroke-dasharray="251 251" transform="rotate(-90 100 100)"/>
+                                <circle cx="100" cy="100" r="80" fill="none" stroke="#8b5cf6" stroke-width="40" stroke-dasharray="126 377" stroke-dashoffset="-251" transform="rotate(-90 100 100)"/>
+                                <circle cx="100" cy="100" r="80" fill="none" stroke="#ec4899" stroke-width="40" stroke-dasharray="75 428" stroke-dashoffset="-377" transform="rotate(-90 100 100)"/>
+                                <circle cx="100" cy="100" r="80" fill="none" stroke="#f59e0b" stroke-width="40" stroke-dasharray="50 453" stroke-dashoffset="-452" transform="rotate(-90 100 100)"/>
+                                <circle cx="100" cy="100" r="40" fill="white"/>
+                                <text x="100" y="95" text-anchor="middle" font-size="24" font-weight="bold" fill="#1e293b">$847K</text>
+                                <text x="100" y="115" text-anchor="middle" font-size="12" fill="#64748b">Total</text>
+                            </svg>
+                        </div>
+                        <div class="legend">
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #667eea;"></div>
+                                <span>Ground (50%)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #8b5cf6;"></div>
+                                <span>Ocean (25%)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #ec4899;"></div>
+                                <span>Air (15%)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #f59e0b;"></div>
+                                <span>Rail (10%)</span>
+                            </div>
+                        </div>
+                        <div class="insight-card">
+                            <h3>💡 AI Insight</h3>
+                            <p>Air freight usage decreased from 23% to 15% this month. Opportunity to reduce further by shifting 30% of remaining air shipments to ocean+rail.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="section-header">
+                        <div class="section-title">Carrier Performance Scorecard</div>
+                        <div class="ai-badge">🤖 AI Analyzed</div>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Carrier</th>
+                                <th>Shipments</th>
+                                <th>On-Time %</th>
+                                <th>Damage Rate</th>
+                                <th>Avg Cost</th>
+                                <th>Rating</th>
+                                <th>AI Recommendation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>FedEx Ground</strong></td>
+                                <td>342</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <span>96.8%</span>
+                                        <div class="progress-bar" style="width: 100px;">
+                                            <div class="progress-fill" style="width: 96.8%;"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>0.3%</td>
+                                <td>$247</td>
+                                <td><span class="status-badge status-compliant">Excellent</span></td>
+                                <td style="color: #059669; font-weight: 600;">✓ Increase volume</td>
+                            </tr>
+                            <tr>
+                                <td><strong>UPS Freight</strong></td>
+                                <td>289</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <span>94.2%</span>
+                                        <div class="progress-bar" style="width: 100px;">
+                                            <div class="progress-fill" style="width: 94.2%;"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>0.5%</td>
+                                <td>$268</td>
+                                <td><span class="status-badge status-compliant">Good</span></td>
+                                <td style="color: #2563eb; font-weight: 600;">→ Maintain current</td>
+                            </tr>
+                            <tr>
+                                <td><strong>XPO Logistics</strong></td>
+                                <td>156</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <span>89.4%</span>
+                                        <div class="progress-bar" style="width: 100px;">
+                                            <div class="progress-fill" style="width: 89.4%;"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>1.2%</td>
+                                <td>$234</td>
+                                <td><span class="status-badge status-pending">Warning</span></td>
+                                <td style="color: #d97706; font-weight: 600;">⚠ Monitor closely</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Old Dominion</strong></td>
+                                <td>198</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <span>97.3%</span>
+                                        <div class="progress-bar" style="width: 100px;">
+                                            <div class="progress-fill" style="width: 97.3%;"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>0.2%</td>
+                                <td>$289</td>
+                                <td><span class="status-badge status-compliant">Excellent</span></td>
+                                <td style="color: #059669; font-weight: 600;">✓ Negotiate volume discount</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Estes Express</strong></td>
+                                <td>124</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <span>85.7%</span>
+                                        <div class="progress-bar" style="width: 100px;">
+                                            <div class="progress-fill" style="width: 85.7%;"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>1.8%</td>
+                                <td>$221</td>
+                                <td><span class="status-badge" style="background: #fee2e2; color: #dc2626;">Poor</span></td>
+                                <td style="color: #dc2626; font-weight: 600;">✗ Consider replacing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="insight-card">
+                        <h3>💡 AI Insight</h3>
+                        <p><strong>Recommendation:</strong> Shift 80% of Estes Express volume to FedEx Ground and Old Dominion. This would improve on-time delivery by 11.6% and reduce damage claims by $12,400 annually while maintaining similar costs.</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Public API
+    window.AnalyticsPage = {
+        render() {
+            return analyticsMarkup();
+        },
+        attachListeners() {
+            // Attach event listeners for interactive elements
+            const exportBtn = document.querySelector('.analytics-page .btn-primary');
+            if (exportBtn && exportBtn.textContent.includes('Export')) {
+                exportBtn.addEventListener('click', () => {
+                    console.log('Exporting analytics report...');
+                    alert('Analytics report export started! This would integrate with your backend API.');
+                });
+            }
+
+            // Chart filter buttons
+            const filterBtns = document.querySelectorAll('.analytics-page .filter-btn');
+            filterBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    // Remove active class from siblings
-                    this.parentElement.querySelectorAll('.filter-btn').forEach(b => {
-                        b.classList.remove('active');
-                    });
-                    // Add active class to clicked button
+                    filterBtns.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    
                     console.log('Filter changed to:', this.textContent);
-                    // Here you would typically update the chart data
                 });
             });
 
             // Recommendation action buttons
-            const recButtons = document.querySelectorAll('.analytics-page .recommendation-card .btn');
-            recButtons.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const action = this.textContent.trim();
-                    const card = this.closest('.recommendation-card');
-                    const title = card.querySelector('.rec-title').textContent.trim();
+            const recBtns = document.querySelectorAll('.analytics-page .rec-actions .btn');
+            recBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const action = this.textContent;
+                    console.log('Recommendation action:', action);
                     
-                    console.log(`Action "${action}" for recommendation: ${title}`);
-                    
-                    // Add visual feedback
-                    this.style.transform = 'scale(0.96)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 120);
-                    
-                    // Show alert for demo purposes
-                    if (action === 'Implement Now') {
-                        alert(`Implementation started for: ${title}\n\nThis would integrate with your backend API to begin the implementation process.`);
-                    } else if (action === 'View Details' || action === 'View Analysis') {
-                        alert(`Detailed analysis for: ${title}\n\nThis would open a detailed view with comprehensive data and projections.`);
-                    } else if (action === 'Run Scenario') {
-                        alert(`Running scenario analysis for: ${title}\n\nThis would launch an interactive scenario planning tool.`);
-                    } else if (action === 'Dismiss') {
-                        if (confirm('Are you sure you want to dismiss this recommendation?')) {
-                            card.style.transition = 'all 0.3s ease';
+                    if (action.includes('Implement') || action.includes('Run Scenario')) {
+                        alert(`${action} initiated! This would trigger the workflow in your system.`);
+                    } else if (action.includes('Dismiss')) {
+                        const card = this.closest('.recommendation-card');
+                        if (card) {
                             card.style.opacity = '0';
-                            card.style.transform = 'translateX(-20px)';
-                            setTimeout(() => {
-                                card.remove();
-                            }, 300);
+                            setTimeout(() => card.remove(), 300);
                         }
                     }
-                });
-            });
-
-            // Export report button
-            const exportBtn = document.querySelector('.analytics-page .header-actions .btn-primary');
-            if (exportBtn && exportBtn.textContent.includes('Export')) {
-                exportBtn.addEventListener('click', function() {
-                    console.log('Exporting report...');
-                    alert('📥 Report Export\n\nYour analytics report is being generated. You will receive a download link via email within 2 minutes.\n\nFormats available: PDF, Excel, CSV');
-                });
-            }
-
-            // Date range button
-            const dateBtn = document.querySelector('.analytics-page .header-actions .btn-secondary');
-            if (dateBtn && dateBtn.textContent.includes('Last')) {
-                dateBtn.addEventListener('click', function() {
-                    console.log('Opening date range picker...');
-                    alert('📅 Date Range Selector\n\nAvailable ranges:\n• Last 7 Days\n• Last 30 Days (Current)\n• Last 90 Days\n• Last 12 Months\n• Custom Range');
-                });
-            }
-
-            // Table row hover effects
-            const tableRows = document.querySelectorAll('.analytics-page .table-container tbody tr');
-            tableRows.forEach(row => {
-                row.addEventListener('click', function() {
-                    const carrier = this.querySelector('td:first-child strong').textContent;
-                    console.log('Viewing details for carrier:', carrier);
-                    alert(`📊 Carrier Details: ${carrier}\n\nThis would open a detailed view with:\n• Historical performance trends\n• Cost breakdown analysis\n• Service level agreements\n• Recommendations for optimization`);
-                });
-            });
-
-            // Bar chart interactions
-            const bars = document.querySelectorAll('.analytics-page .bar');
-            bars.forEach(bar => {
-                bar.addEventListener('click', function() {
-                    const label = this.querySelector('.bar-label').textContent;
-                    const value = this.querySelector('.bar-value').textContent;
-                    console.log(`Bar clicked: ${label} - ${value}`);
-                    alert(`📊 ${label} Details\n\nTotal Spend: ${value}\n\nBreakdown:\n• Ground: 50%\n• Ocean: 25%\n• Air: 15%\n• Rail: 10%\n\nClick "View Details" in the full dashboard to see more.`);
                 });
             });
         }

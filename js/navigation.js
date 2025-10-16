@@ -14,19 +14,6 @@ const Navigation = {
             item.addEventListener('click', (e) => {
                 const page = item.getAttribute('data-page');
                 this.navigateTo(page);
-
-                // Initialize tabs once the new HTML is in the DOM
-                setTimeout(() => {
-                    if (page === 'ai-assistant' && window.DFYAssistantTabs) {
-                        const root = document.getElementById('page-container') || document.querySelector('.page');
-                        window.DFYAssistantTabs.init(root);
-                    }
-                    
-                    // Initialize Assistant page listeners
-                    if (page === 'ai-assistant' && window.AssistantPage) {
-                        window.AssistantPage.attachListeners();
-                    }
-                }, 0);
             });
         });
     },
@@ -76,17 +63,17 @@ const Navigation = {
             });
         });
         
-        // Add page-specific listeners
+        // Page-specific listeners
+        if (page === 'ai-assistant' && window.AssistantPage) {
+            window.AssistantPage.attachListeners();
+        }
+        
+        if (page === 'analytics' && window.AnalyticsPage) {
+            window.AnalyticsPage.attachListeners();
+        }
+        
         if (page === 'compliance') {
             this.attachComplianceListeners();
-        } else if (page === 'analytics') {
-            this.attachAnalyticsListeners();
-        }
-    },
-    
-    attachAnalyticsListeners() {
-        if (window.AnalyticsPage) {
-            window.AnalyticsPage.init();
         }
     },
     
