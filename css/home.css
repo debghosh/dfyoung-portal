@@ -1,0 +1,80 @@
+/* Home Page Styles */
+.home-page {
+    /* Page-specific overrides if needed */
+}
+
+.home-page .recent-shipments {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.home-page .shipment-item {
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.home-page .shipment-item:hover {
+    background: #e2e8f0;
+    transform: translateX(4px);
+}
+
+.home-page .shipment-info {
+    flex: 1;
+}
+
+.home-page .shipment-id {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #1e293b;
+}
+
+.home-page .shipment-status-text {
+    font-size: 0.85em;
+    color: #64748b;
+}
+
+.home-page .performance-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.home-page .performance-item {
+    /* Individual metric styling */
+}
+
+.home-page .performance-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.home-page .performance-header span:first-child {
+    color: #64748b;
+}
+
+.home-page .performance-value {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.home-page .progress-bar-container {
+    background: #e2e8f0;
+    height: 8px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.home-page .progress-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}

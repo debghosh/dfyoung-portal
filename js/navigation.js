@@ -64,16 +64,28 @@ const Navigation = {
         });
         
         // Page-specific listeners
-        if (page === 'ai-assistant' && window.AssistantPage) {
-            window.AssistantPage.attachListeners();
-        }
+        const pageModules = {
+            'home': window.HomePage,
+            'ai-assistant': window.AssistantPage,
+            'analytics': window.AnalyticsPage,
+            'command': window.CommandPage,
+            'shipments': window.ShipmentsPage,
+            'compliance': window.CompliancePage,
+            'recommendations': window.RecommendationsPage,
+            'risk-monitor': window.RiskMonitorPage,
+            'performance': window.PerformancePage,
+            'sustainability': window.SustainabilityPage,
+            'carrier-scorecards': window.CarrierScorecardsPage,
+            'invoices': window.InvoicesPage,
+            'preferences': window.PreferencesPage,
+            'team': window.TeamPage,
+            'notifications': window.NotificationsPage
+        };
         
-        if (page === 'analytics' && window.AnalyticsPage) {
-            window.AnalyticsPage.attachListeners();
-        }
-        
-        if (page === 'compliance') {
-            this.attachComplianceListeners();
+        // Call attachListeners for the current page module if it exists
+        const pageModule = pageModules[page];
+        if (pageModule && typeof pageModule.attachListeners === 'function') {
+            pageModule.attachListeners();
         }
     },
     

@@ -1,0 +1,41 @@
+/* Team Page Styles */
+.team-page {
+    /* Page-specific styles */
+}
+
+.team-page .team-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.team-page .edit-btn,
+.team-page .resend-btn {
+    padding: 5px 10px;
+    font-size: 0.85em;
+}
+
+.team-page .roles-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.team-page .role-item {
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.team-page .role-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #1e293b;
+}
+
+.team-page .role-desc {
+    font-size: 0.9em;
+    color: #64748b;
+}

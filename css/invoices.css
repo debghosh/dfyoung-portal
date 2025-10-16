@@ -1,0 +1,19 @@
+/* Invoices Page Styles */
+.invoices-page {
+    /* Page-specific styles */
+}
+
+.invoices-page .invoices-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.invoices-page .pay-btn,
+.invoices-page .download-btn {
+    padding: 5px 10px;
+    font-size: 0.85em;
+}

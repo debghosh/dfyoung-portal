@@ -1,0 +1,8 @@
+/* Recommendations Page Styles */
+.recommendations-page {
+    /* Page-specific styles */
+}
+
+.recommendations-page .rec-card {
+    margin-bottom: 25px;
+}

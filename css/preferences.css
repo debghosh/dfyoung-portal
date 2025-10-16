@@ -1,0 +1,38 @@
+/* Preferences Page Styles */
+.preferences-page {
+    /* Page-specific styles */
+}
+
+.preferences-page .form-group {
+    margin-bottom: 15px;
+}
+
+.preferences-page .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.preferences-page .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.preferences-page .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.preferences-page .checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.preferences-page .checkbox-label span {
+    color: #1e293b;
+}

@@ -1,0 +1,12 @@
+/* Carrier Scorecards Page Styles */
+.carrier-scorecards-page {
+    /* Page-specific styles */
+}
+
+.carrier-scorecards-page .data-table tbody tr {
+    cursor: pointer;
+}
+
+.carrier-scorecards-page .data-table tbody tr:hover {
+    background: #f8fafc;
+}

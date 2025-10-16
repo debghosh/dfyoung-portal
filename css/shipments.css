@@ -1,0 +1,38 @@
+/* Shipments Page Styles */
+.shipments-page {
+    /* Page-specific styles */
+}
+
+.shipments-page .shipments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.shipments-page .track-btn,
+.shipments-page .details-btn {
+    padding: 5px 10px;
+    font-size: 0.85em;
+}
+
+.shipments-page .data-table tbody tr {
+    cursor: pointer;
+}
+
+.shipments-page .data-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+@media (max-width: 768px) {
+    .shipments-page .shipments-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .shipments-page .shipments-header .btn {
+        width: 100%;
+    }
+}
