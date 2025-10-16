@@ -1,50 +1,414 @@
-/* Compliance Hub Page Styles */
-.compliance-page {
-    /* Page-specific styles */
-}
+/* Compliance Hub Specific Styles */
 
-.compliance-page .compliance-header {
+/* Compliance Score Display */
+.compliance-score-container {
+    background: white;
+    padding: 15px 25px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 2px solid #10b981;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
     gap: 15px;
 }
 
-.compliance-page .compliance-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.compliance-page .stat-box {
-    text-align: center;
-    padding: 15px;
-    background: #f8fafc;
-    border-radius: 8px;
-}
-
-.compliance-page .stat-value {
-    font-size: 1.8em;
+.compliance-score-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
     font-weight: bold;
-    margin-bottom: 4px;
+    color: white;
 }
 
-.compliance-page .stat-box:nth-child(1) .stat-value {
-    color: #667eea;
+.compliance-score-label {
+    font-size: 0.85em;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.compliance-page .stat-box:nth-child(2) .stat-value {
+.compliance-score-value {
+    font-size: 1.3em;
+    font-weight: 700;
     color: #10b981;
 }
 
-.compliance-page .stat-box:nth-child(3) .stat-value {
-    color: #3b82f6;
+/* Alert Banner */
+.compliance-alert-banner {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
-.compliance-page .stat-label {
+.compliance-alert-icon {
+    font-size: 2em;
+}
+
+.compliance-alert-content {
+    flex: 1;
+    min-width: 300px;
+}
+
+.compliance-alert-title {
+    font-weight: 700;
+    color: #92400e;
+    margin-bottom: 5px;
+}
+
+.compliance-alert-text {
+    color: #78350f;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+/* AI Form Generator */
+.ai-form-generator {
+    background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #8b5cf6;
+}
+
+.ai-form-title {
+    font-weight: 700;
+    color: #6b21a8;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1em;
+}
+
+.ai-form-description {
+    color: #5b21b6;
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.ai-form-input-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.ai-form-input-group .form-input,
+.ai-form-input-group .form-select {
+    padding: 10px;
+    border: 2px solid #c4b5fd;
+    border-radius: 8px;
+    font-size: 0.9em;
+}
+
+.ai-form-input-group .form-input:focus,
+.ai-form-input-group .form-select:focus {
+    outline: none;
+    border-color: #8b5cf6;
+}
+
+/* Stats Grid */
+.compliance-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.compliance-stat-card {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+}
+
+.compliance-stat-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 5px;
+}
+
+.compliance-stat-label {
     font-size: 0.8em;
     color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Document Items */
+.doc-item {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.doc-item:hover {
+    background: #f1f5f9;
+    transform: translateX(5px);
+}
+
+.doc-item-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.doc-item-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2em;
+}
+
+.doc-item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.doc-item-name {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 0.95em;
+}
+
+.doc-item-meta {
+    font-size: 0.8em;
+    color: #64748b;
+}
+
+.doc-item-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Regulation Items */
+.regulation-item {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border-left: 4px solid;
+}
+
+.regulation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.regulation-title {
+    font-weight: 700;
+    color: #1e293b;
+    font-size: 0.95em;
+}
+
+.regulation-description {
+    color: #475569;
+    font-size: 0.85em;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.regulation-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8em;
+    color: #64748b;
+}
+
+/* Audit Trail */
+.audit-trail {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.audit-item {
+    display: flex;
+    gap: 15px;
+    position: relative;
+}
+
+.audit-item::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 40px;
+    width: 2px;
+    height: calc(100% + 15px);
+    background: #e2e8f0;
+}
+
+.audit-item:last-child::before {
+    display: none;
+}
+
+.audit-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1em;
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+.audit-content {
+    flex: 1;
+    background: #f8fafc;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.audit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+}
+
+.audit-title {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 0.9em;
+}
+
+.audit-time {
+    font-size: 0.75em;
+    color: #64748b;
+}
+
+.audit-description {
+    font-size: 0.85em;
+    color: #475569;
+    line-height: 1.4;
+}
+
+/* Training Items */
+.training-item {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+}
+
+.training-info {
+    flex: 1;
+}
+
+.training-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.training-meta {
+    font-size: 0.8em;
+    color: #64748b;
+}
+
+.training-progress-bar {
+    width: 150px;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.training-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+/* Certification Items */
+.cert-item {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 12px;
+}
+
+.cert-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2em;
+}
+
+.cert-info {
+    flex: 1;
+}
+
+.cert-name {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.cert-meta {
+    font-size: 0.8em;
+    color: #64748b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .ai-form-input-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .compliance-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .compliance-alert-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .training-progress-bar {
+        width: 100px;
+    }
 }

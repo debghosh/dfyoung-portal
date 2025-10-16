@@ -1,0 +1,64 @@
+/* Command Center Page Styles */
+.command-page {
+    /* Page-specific styles */
+}
+
+.command-page .network-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.command-page .network-region {
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.command-page .network-region:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.command-page .network-region.warning {
+    background: #fef3c7;
+}
+
+.command-page .network-region.warning:hover {
+    background: #fde68a;
+}
+
+.command-page .region-name {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1e293b;
+}
+
+.command-page .region-count {
+    font-size: 2em;
+    font-weight: bold;
+    color: #10b981;
+    margin-bottom: 4px;
+}
+
+.command-page .network-region.warning .region-count {
+    color: #f59e0b;
+}
+
+.command-page .region-label {
+    font-size: 0.85em;
+    color: #64748b;
+}
+
+.command-page .alert-item {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.command-page .alert-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

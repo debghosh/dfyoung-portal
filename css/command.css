@@ -1,64 +1,455 @@
-/* Command Center Page Styles */
-.command-page {
-    /* Page-specific styles */
+/* Supply Chain Command Center Styles */
+
+/* Command Center Layout */
+.command-center-page {
+    background: #0f172a;
+    margin: -30px;
+    padding: 0;
+    min-height: 100vh;
 }
 
-.command-page .network-grid {
+/* Top Bar */
+.command-top-bar {
+    background: linear-gradient(90deg, #1e293b 0%, #334155 100%);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #334155;
+}
+
+.command-logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+}
+
+.command-logo-highlight {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.command-status-indicators {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    color: white;
+}
+
+.command-status-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    font-size: 0.9em;
+}
+
+/* Status Dots */
+.status-dot-green,
+.status-dot-yellow,
+.status-dot-red {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.status-dot-green {
+    background: #10b981;
+    box-shadow: 0 0 10px #10b981;
+}
+
+.status-dot-yellow {
+    background: #f59e0b;
+    box-shadow: 0 0 10px #f59e0b;
+}
+
+.status-dot-red {
+    background: #ef4444;
+    box-shadow: 0 0 10px #ef4444;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Main Grid */
+.command-main-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 300px;
+    gap: 20px;
+    padding: 20px;
+    height: calc(100vh - 70px);
+}
+
+/* Map Container */
+.command-map-container {
+    background: #1e293b;
+    border-radius: 15px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #334155;
+    grid-row: 1 / 3;
+}
+
+.command-map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.command-map-title {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: white;
+}
+
+.command-map-filters {
+    display: flex;
+    gap: 8px;
+}
+
+/* Filter Chips */
+.filter-chip {
+    padding: 6px 12px;
+    background: rgba(102, 126, 234, 0.2);
+    border: 1px solid #667eea;
+    border-radius: 20px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: white;
+}
+
+.filter-chip:hover,
+.filter-chip.active {
+    background: #667eea;
+}
+
+/* AI Insight Banner */
+.command-ai-insight {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+    border: 1px solid #667eea;
+    border-radius: 10px;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+}
+
+.command-ai-icon {
+    font-size: 1.5em;
+}
+
+.command-ai-text {
+    flex: 1;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+/* World Map */
+.command-world-map {
+    width: 100%;
+    height: calc(100% - 140px);
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-radius: 10px;
+    position: relative;
+    background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(102, 126, 234, 0.03) 50px, rgba(102, 126, 234, 0.03) 51px),
+        repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(102, 126, 234, 0.03) 50px, rgba(102, 126, 234, 0.03) 51px);
+}
+
+/* Shipment Markers */
+.shipment-marker {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #667eea;
+    border-radius: 50%;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: markerPulse 2s infinite;
+}
+
+.shipment-marker:hover {
+    transform: scale(1.5);
+    z-index: 10;
+}
+
+@keyframes markerPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7); }
+    50% { box-shadow: 0 0 0 10px rgba(102, 126, 234, 0); }
+}
+
+.shipment-marker-in-transit {
+    background: #3b82f6;
+}
+
+.shipment-marker-delayed {
+    background: #f59e0b;
+}
+
+.shipment-marker-critical {
+    background: #ef4444;
+    animation: criticalPulse 1s infinite;
+}
+
+@keyframes criticalPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+    50% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+}
+
+/* Route Lines */
+.route-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #667eea, transparent);
+    transform-origin: left center;
+    opacity: 0.3;
+}
+
+/* Tooltip */
+.command-tooltip {
+    position: absolute;
+    background: rgba(30, 41, 59, 0.95);
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #667eea;
+    font-size: 0.85em;
+    pointer-events: none;
+    z-index: 100;
+    display: none;
+    backdrop-filter: blur(10px);
+    color: white;
+}
+
+/* Legend */
+.command-legend {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    color: white;
+    font-size: 0.8em;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+/* Alerts Panel */
+.command-alerts-panel {
+    background: #1e293b;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #334155;
+    overflow-y: auto;
+    color: white;
+}
+
+.command-panel-title {
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Alert Items */
+.command-alert-item {
+    background: rgba(255,255,255,0.03);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 3px solid #667eea;
+    transition: all 0.2s ease;
+}
+
+.command-alert-item:hover {
+    background: rgba(255,255,255,0.08);
+    transform: translateX(5px);
+}
+
+.command-alert-item.warning {
+    border-left-color: #f59e0b;
+}
+
+.command-alert-item.critical {
+    border-left-color: #ef4444;
+    animation: alertBlink 2s infinite;
+}
+
+@keyframes alertBlink {
+    0%, 100% { background: rgba(239, 68, 68, 0.1); }
+    50% { background: rgba(239, 68, 68, 0.2); }
+}
+
+.command-alert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+}
+
+.command-alert-title {
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+.command-alert-time {
+    font-size: 0.75em;
+    color: #94a3b8;
+}
+
+.command-alert-description {
+    font-size: 0.85em;
+    color: #cbd5e1;
+    line-height: 1.4;
+}
+
+.command-alert-action {
+    margin-top: 8px;
+    padding: 4px 10px;
+    background: #667eea;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 0.75em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.command-alert-action:hover {
+    background: #764ba2;
+}
+
+/* Metrics Panel */
+.command-metrics-panel {
+    background: #1e293b;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #334155;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
 }
 
-.command-page .network-region {
+.command-metric-card {
+    background: rgba(255,255,255,0.03);
     padding: 15px;
-    background: #f8fafc;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
-.command-page .network-region:hover {
-    background: #e2e8f0;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.command-page .network-region.warning {
-    background: #fef3c7;
-}
-
-.command-page .network-region.warning:hover {
-    background: #fde68a;
-}
-
-.command-page .region-name {
-    font-weight: 600;
+.command-metric-label {
+    font-size: 0.75em;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     margin-bottom: 8px;
-    color: #1e293b;
 }
 
-.command-page .region-count {
+.command-metric-value {
     font-size: 2em;
     font-weight: bold;
-    color: #10b981;
-    margin-bottom: 4px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.command-page .network-region.warning .region-count {
+.command-metric-change {
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+.command-metric-change.positive {
+    color: #10b981;
+}
+
+.command-metric-change.negative {
+    color: #ef4444;
+}
+
+/* Risk Badges */
+.risk-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.risk-low {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.risk-medium {
+    background: rgba(245, 158, 11, 0.2);
     color: #f59e0b;
 }
 
-.command-page .region-label {
-    font-size: 0.85em;
-    color: #64748b;
+.risk-high {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
 }
 
-.command-page .alert-item {
-    cursor: pointer;
-    transition: all 0.2s ease;
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .command-main-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+    
+    .command-map-container {
+        grid-row: auto;
+        height: 500px;
+    }
+    
+    .command-metrics-panel {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-.command-page .alert-item:hover {
-    transform: translateX(4px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+@media (max-width: 768px) {
+    .command-status-indicators {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .command-top-bar {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .command-metrics-panel {
+        grid-template-columns: 1fr;
+    }
+    
+    .command-map-filters {
+        flex-wrap: wrap;
+    }
 }

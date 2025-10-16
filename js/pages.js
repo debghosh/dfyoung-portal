@@ -23,10 +23,19 @@ const Pages = {
 
     // COMMAND CENTER PAGE
     command() {
-        return window.CommandPage
-            ? window.CommandPage.render()
-            : '<div class="page"><div class="card">Command Center module failed to load.</div></div>';
-    },
+    console.log('command() called, CommandCenterPage is:', window.CommandCenterPage);
+    console.log('Is CommandCenterPage truthy?', !!window.CommandCenterPage);
+    
+    if (window.CommandCenterPage) {
+        console.log('Calling render()...');
+        const html = window.CommandCenterPage.render();
+        console.log('Render returned:', html.substring(0, 100) + '...');
+        return html;
+    } else {
+        console.log('CommandCenterPage is falsy!');
+        return '<div class="page"><div class="card">Command Center module failed to load.</div></div>';
+    }
+},
 
     // COMPLIANCE HUB PAGE
     compliance() {
